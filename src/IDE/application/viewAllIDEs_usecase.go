@@ -1,8 +1,8 @@
 package application
 
 import (
-	"rest/src/ide/domain"
-	"rest/src/ide/domain/entities"
+	"rest/src/IDE/domain"
+	"rest/src/IDE/domain/entities"
 )
 
 type ViewAllIDEsUseCase struct {

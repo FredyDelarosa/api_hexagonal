@@ -1,8 +1,8 @@
 package infrastructureIDE
 
 import (
+	"rest/src/IDE/application"
 	"rest/src/core"
-	"rest/src/ide/application"
 )
 
 type Dependencies struct {

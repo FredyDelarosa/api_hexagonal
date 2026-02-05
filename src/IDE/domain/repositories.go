@@ -1,6 +1,6 @@
 package domain
 
-import "rest/src/ide/domain/entities"
+import "rest/src/IDE/domain/entities"
 
 type IDERepository interface {
 	GetAll() ([]entities.IDE, error)

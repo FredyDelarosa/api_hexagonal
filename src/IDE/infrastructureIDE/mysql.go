@@ -2,8 +2,8 @@ package infrastructureIDE
 
 import (
 	"database/sql"
-	"rest/src/ide/domain"
-	"rest/src/ide/domain/entities"
+	"rest/src/IDE/domain"
+	"rest/src/IDE/domain/entities"
 )
 
 type MySQLRepository struct {

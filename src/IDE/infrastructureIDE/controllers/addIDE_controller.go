@@ -2,8 +2,8 @@ package controllers
 
 import (
 	"net/http"
-	"rest/src/ide/application"
-	"rest/src/ide/domain/entities"
+	"rest/src/IDE/application"
+	"rest/src/IDE/domain/entities"
 
 	"github.com/gin-gonic/gin"
 )

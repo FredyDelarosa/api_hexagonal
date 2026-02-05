@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"net/http"
-	"rest/src/ide/application"
+	"rest/src/IDE/application"
 	"strconv"
 
 	"github.com/gin-gonic/gin"

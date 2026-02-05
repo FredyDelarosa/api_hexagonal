@@ -1,6 +1,6 @@
 package application
 
-import "rest/src/ide/domain"
+import "rest/src/IDE/domain"
 
 type RemoveIDEUseCase struct {
 	repo domain.IDERepository

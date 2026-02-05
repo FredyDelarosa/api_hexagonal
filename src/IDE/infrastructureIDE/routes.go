@@ -1,19 +1,20 @@
 package infrastructureIDE
 
 import (
-	"rest/src/ide/application"
-	"rest/src/ide/infrastructureIDE/controllers"
+"rest/src/IDE/application"
+"rest/src/IDE/infrastructureIDE/controllers"
+"rest/src/core/middleware"
 
-	"github.com/gin-gonic/gin"
+"github.com/gin-gonic/gin"
 )
 
 func RegisterIDERoutes(
-	router *gin.Engine,
-	addIDEUseCase *application.AddIDEUseCase,
-	viewAllIDEsUseCase *application.ViewAllIDEsUseCase,
-	viewIDEByIDUseCase *application.ViewIDEByIDUseCase,
-	removeIDEUseCase *application.RemoveIDEUseCase,
-	updateIDEUseCase *application.UpdateIDEUseCase,
+router *gin.Engine,
+addIDEUseCase *application.AddIDEUseCase,
+viewAllIDEsUseCase *application.ViewAllIDEsUseCase,
+viewIDEByIDUseCase *application.ViewIDEByIDUseCase,
+removeIDEUseCase *application.RemoveIDEUseCase,
+updateIDEUseCase *application.UpdateIDEUseCase,
 ) {
 	addController := controllers.NewAddIDEController(addIDEUseCase)
 	viewAllController := controllers.NewViewAllIDEsController(viewAllIDEsUseCase)
@@ -21,10 +22,16 @@ func RegisterIDERoutes(
 	removeController := controllers.NewRemoveIDEController(removeIDEUseCase)
 	updateController := controllers.NewUpdateIDEController(updateIDEUseCase)
 
-	router.POST("/ides", addController.CreateIDE)
+	// Rutas públicas (GET - solo lectura)
 	router.GET("/ides", viewAllController.ListAllIDEs)
 	router.GET("/ides/:id", viewByIDController.GetIDEByID)
-	router.DELETE("/ides/:id", removeController.DeleteIDE)
-	router.PUT("/ides/:id", updateController.UpdateIDE)
 
+	// Rutas protegidas (POST, PUT, DELETE - modificación)
+	protectedIdeGroup := router.Group("/ides")
+	protectedIdeGroup.Use(middleware.AuthMiddleware())
+	{
+		protectedIdeGroup.POST("", addController.CreateIDE)
+		protectedIdeGroup.PUT("/:id", updateController.UpdateIDE)
+		protectedIdeGroup.DELETE("/:id", removeController.DeleteIDE)
+	}
 }
